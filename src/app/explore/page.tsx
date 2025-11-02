@@ -4,9 +4,56 @@
  */
 export default function ExplorePage() {
   return (
-    <div className="space-y-4">
-      <h1 className="text-3xl font-heading mb-2">Explore Juana Diaz</h1>
-      <p>Discover attractions, restaurants and landmarks around Juana Diaz. Use the map and filters to find the perfect places to visit.</p>
-    </div>
+    <section className="bg-white text-gray-900 py-16 sm:py-24">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8">
+        <header className="text-center mb-12">
+          <h1 className="text-4xl font-bold tracking-tight text-indigo-600 sm:text-5xl">
+            Explore Juana Díaz
+          </h1>
+          <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+            A vibrant community rich in history, culture, and natural beauty.
+          </p>
+        </header>
+
+        <div className="space-y-10 text-lg leading-relaxed text-gray-700">
+          <p>
+            Juana Díaz stands as a dynamic center of heritage and innovation on
+            Puerto Rico’s southern coast. The town blends traditional artistry
+            with modern enterprise, creating a unique environment where history
+            and progress coexist. From the vivid murals that decorate downtown
+            to the welcoming plazas filled with local conversation, every corner
+            reflects a community proud of its identity and resilience.
+          </p>
+
+          <p>
+            The culinary scene captures the essence of local flavor—family-owned
+            restaurants serve dishes that celebrate generations of tradition.
+            Visitors can sample authentic Puerto Rican cuisine, explore small
+            cafés along the plaza, or enjoy seafood prepared with coastal
+            freshness. Each meal tells a story about connection, culture, and
+            shared experience, turning dining into a celebration of daily life.
+          </p>
+
+          <p>
+            Beyond the town center, natural landmarks and cultural festivals
+            offer endless opportunities for discovery. The serene rivers, nearby
+            beaches, and mountain views invite adventure and reflection alike.
+            Annual events—such as artisan fairs and musical parades—illustrate
+            the rhythm of community life, reminding every visitor that Juana
+            Díaz is not only a destination, but a living story of people and
+            place.
+          </p>
+        </div>
+
+        <footer className="mt-12 text-center">
+          <a
+            href="/directory"
+            className="inline-block bg-indigo-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-indigo-600 transition"
+          >
+            Discover Local Businesses →
+          </a>
+        </footer>
+      </div>
+    </section>
   );
 }
