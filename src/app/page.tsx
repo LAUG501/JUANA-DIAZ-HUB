@@ -1,40 +1,66 @@
-import Hero from '@/components/Hero';
-import Card from '@/components/Card';
-import Link from 'next/link';
+'use client';
+import Image from 'next/image';
 
-/**
- * Home page. Provides overview of what Juana Díaz Hub offers and highlights
- * some key sections such as the directory, events calendar and blog.
- */
-export default function HomePage() {
+export default function ExplorePage() {
   return (
-    <div className="space-y-12">
-      <Hero
-        imageUrl="https://images.unsplash.com/photo-___YOUR_HERO_IMAGE_LINK___?auto=format&fit=crop&w=2000&q=60"
-        altText="Downtown Juana Díaz plaza"
-      />
+    <section className="bg-white text-gray-900 py-16 sm:py-24">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8">
+        <header className="text-center mb-12">
+          <h1 className="text-4xl font-bold tracking-tight text-indigo-600 sm:text-5xl">
+            Explore Juana Díaz
+          </h1>
+          <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+            A vibrant community rich in history, culture, and natural beauty.
+          </p>
+        </header>
 
-      {/* Highlights section */}
-      <section>
-        <h2 className="text-2xl font-heading mb-4">Discover Juana Díaz</h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          <Card imageUrl="https://images.unsplash.com/photo-___DIRECTORY_IMAGE_LINK___?auto=format&fit=crop&w=800&q=60">
-            <h3 className="text-xl font-heading mb-2">Directory</h3>
-            <p className="text-sm mb-4">Browse local businesses, services, venues and community organizations.</p>
-            <Link href="/directory" className="text-primary font-semibold">Explore Directory →</Link>
-          </Card>
-          <Card imageUrl="https://images.unsplash.com/photo-___EVENTS_IMAGE_LINK___?auto=format&fit=crop&w=800&q=60">
-            <h3 className="text-xl font-heading mb-2">Events Calendar</h3>
-            <p className="text-sm mb-4">Stay up to date with upcoming festivals, classes, workshops and weekly challenges.</p>
-            <Link href="/event-calendar" className="text-primary font-semibold">View Calendar →</Link>
-          </Card>
-          <Card imageUrl="https://images.unsplash.com/photo-___BLOG_IMAGE_LINK___?auto=format&fit=crop&w=800&q=60">
-            <h3 className="text-xl font-heading mb-2">Stories & Guides</h3>
-            <p className="text-sm mb-4">Read blog posts, how-to guides and local stories to enrich your visit.</p>
-            <Link href="/blog" className="text-primary font-semibold">Read More →</Link>
-          </Card>
+        <div className="space-y-10 text-lg leading-relaxed text-gray-700">
+          <p>
+            Juana Díaz stands as a dynamic center of heritage and innovation on
+            Puerto Rico’s southern coast. The town blends traditional artistry
+            with modern enterprise, creating a unique environment where history
+            and progress coexist.
+          </p>
+
+          <Image
+            src="https://images.unsplash.com/photo-1584306673395-3bbf73791797?auto=format&fit=crop&w=1600&q=60"
+            alt="Local cuisine from Puerto Rico"
+            width={1200}
+            height={700}
+            className="rounded-xl shadow-md mx-auto"
+          />
+
+          <p>
+            The culinary scene captures the essence of local flavor—family-owned
+            restaurants serve dishes that celebrate generations of tradition.
+            Visitors can sample authentic Puerto Rican cuisine, explore cafés
+            along the plaza, or enjoy seafood prepared with coastal freshness.
+          </p>
+
+          <Image
+            src="https://upload.wikimedia.org/wikipedia/commons/3/31/Iglesia_de_San_Juan_Bautista_y_San_Ramon_Nonato_-_Juana_Diaz_Puerto_Rico.jpg"
+            alt="Juana Díaz downtown plaza"
+            width={1200}
+            height={700}
+            className="rounded-xl shadow-md mx-auto"
+          />
+
+          <p>
+            Beyond the town center, natural landmarks and cultural festivals
+            offer endless opportunities for discovery. Rivers, nearby beaches,
+            and mountain views invite both adventure and reflection.
+          </p>
         </div>
-      </section>
-    </div>
+
+        <footer className="mt-12 text-center">
+          <a
+            href="/directory"
+            className="inline-block bg-indigo-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-indigo-600 transition"
+          >
+            Discover Local Businesses →
+          </a>
+        </footer>
+      </div>
+    </section>
   );
 }
