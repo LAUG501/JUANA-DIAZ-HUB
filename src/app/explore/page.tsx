@@ -18,7 +18,7 @@ export default function ExplorePage() {
         {/* Hero Image */}
         <div className="mb-14">
           <img
-            src="https://images.unsplash.com/photo-2YLDQaAnJqU?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
+            src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Casa_Alcaldia_-_Juana_Diaz_Puerto_Rico.jpg=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
             alt="Juana Díaz landscape"
             className="w-full h-80 object-cover rounded-lg shadow-md"
           />
@@ -38,7 +38,7 @@ export default function ExplorePage() {
           {/* Inline Image */}
           <div className="rounded-lg overflow-hidden shadow-md my-6">
             <img
-              src="https://images.unsplash.com/photo-c8-XRo4a_VM?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
+              src="https://upload.wikimedia.org/wikipedia/commons/7/72/Juana_D%C3%ADaz_Pueblo%2C_Puerto_Rico.jpg=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
               alt="Local street and culture"
               className="w-full h-72 object-cover"
             />
@@ -56,7 +56,7 @@ export default function ExplorePage() {
           {/* Inline Image */}
           <div className="rounded-lg overflow-hidden shadow-md my-6">
             <img
-              src="https://images.unsplash.com/photo-1600891963937-9605e2f5a52b?auto=format&fit=crop&w=1800&q=60"
+              src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Plaza_Rom%C3%A1n_Baldorioty_de_Castro_-_Juana_Diaz%2C_PR_%282025%29-1.jpg?auto=format&fit=crop&w=1800&q=60"
               alt="Puerto Rican food and dining"
               className="w-full h-72 object-cover"
             />
