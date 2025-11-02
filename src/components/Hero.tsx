@@ -1,34 +1,29 @@
-"use client";
-import Link from 'next/link';
+// components/Hero.tsx
+import Image from "next/image";
+import Link from "next/link";
 
-/**
- * Hero section for the home page. Displays a headline, subheadline and call-to-action buttons.
- */
 export default function Hero() {
   return (
-    <section className="bg-neutralLight text-neutralDark py-12 md:py-20">
-      <div className="container mx-auto flex flex-col md:flex-row items-center gap-8">
-        <div className="flex-1">
-          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-primary">
-            Welcome to Juana Diaz Hub
-          </h1>
-          <p className="text-lg mb-6">
-            Your passport to the culture, nightlife, and community of Juana Diaz, Puerto Rico. Explore local businesses, connect with residents, discover events and plan your visit.
-          </p>
-          <div className="flex space-x-4">
-            <Link href="/explore" className="px-5 py-3 rounded bg-primary text-neutralLight font-semibold hover:bg-primary/90">
-              Explore Now
-            </Link>
-            <Link href="/forum" className="px-5 py-3 rounded border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-neutralLight">
-              Join the Forum
-            </Link>
-          </div>
-        </div>
-        <div className="flex-1">
-          {/* Placeholder for hero image/video. Replace src with actual asset */}
-          <div className="h-64 md:h-80 bg-neutralDark/10 rounded-lg flex items-center justify-center">
-            <span className="text-neutralDark/50">Hero Image</span>
-          </div>
+    <section className="relative overflow-hidden rounded-3xl bg-gray-900 text-white">
+      <Image
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=60"
+        alt="Puerto Rico coastline"
+        fill
+        className="object-cover opacity-60"
+        priority
+      />
+      <div className="relative z-10 px-6 py-24 md:px-12">
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">Juana Díaz Hub</h1>
+        <p className="mt-4 max-w-2xl text-lg md:text-xl text-gray-100">
+          Gateway for businesses, events, services, and community life across Puerto Rico.
+        </p>
+        <div className="mt-8 flex gap-4">
+          <Link href="/directory" className="rounded-xl bg-white text-gray-900 px-5 py-3 font-semibold">
+            Explore Directory
+          </Link>
+          <Link href="/events" className="rounded-xl bg-primary px-5 py-3 font-semibold">
+            View Events
+          </Link>
         </div>
       </div>
     </section>
