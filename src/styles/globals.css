@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom global styles */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&family=Pacifico&display=swap');
+
+body {
+  @apply font-body bg-neutralLight text-neutralDark;
+  line-height: 1.6;
+}
+
+a {
+  @apply text-primary hover:underline;
+}
+
+/* Utility classes for headings */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-heading text-neutralDark;
+}
