@@ -1,4 +1,4 @@
-// app/about/juana-diaz/page.jsx
+// app/about-us/juana-diaz/page.jsx
 
 import Image from 'next/image';
 
