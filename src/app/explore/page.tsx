@@ -5,7 +5,7 @@
 export default function ExplorePage() {
   return (
     <section className="bg-white text-gray-900 py-16 sm:py-24">
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <header className="text-center mb-12">
           <h1 className="text-4xl font-bold tracking-tight text-indigo-600 sm:text-5xl">
             Explore Juana Díaz
@@ -15,6 +15,16 @@ export default function ExplorePage() {
           </p>
         </header>
 
+        {/* Hero Image */}
+        <div className="mb-14">
+          <img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=60"
+            alt="Juana Díaz landscape"
+            className="w-full h-80 object-cover rounded-lg shadow-md"
+          />
+        </div>
+
+        {/* Paragraphs */}
         <div className="space-y-10 text-lg leading-relaxed text-gray-700">
           <p>
             Juana Díaz stands as a dynamic center of heritage and innovation on
@@ -25,6 +35,15 @@ export default function ExplorePage() {
             reflects a community proud of its identity and resilience.
           </p>
 
+          {/* Inline Image */}
+          <div className="rounded-lg overflow-hidden shadow-md my-6">
+            <img
+              src="https://images.unsplash.com/photo-1601582586891-1f8e89d0f61e?auto=format&fit=crop&w=1800&q=60"
+              alt="Local street and culture"
+              className="w-full h-72 object-cover"
+            />
+          </div>
+
           <p>
             The culinary scene captures the essence of local flavor—family-owned
             restaurants serve dishes that celebrate generations of tradition.
@@ -33,6 +52,15 @@ export default function ExplorePage() {
             freshness. Each meal tells a story about connection, culture, and
             shared experience, turning dining into a celebration of daily life.
           </p>
+
+          {/* Inline Image */}
+          <div className="rounded-lg overflow-hidden shadow-md my-6">
+            <img
+              src="https://images.unsplash.com/photo-1600891963937-9605e2f5a52b?auto=format&fit=crop&w=1800&q=60"
+              alt="Puerto Rican food and dining"
+              className="w-full h-72 object-cover"
+            />
+          </div>
 
           <p>
             Beyond the town center, natural landmarks and cultural festivals
@@ -43,8 +71,18 @@ export default function ExplorePage() {
             Díaz is not only a destination, but a living story of people and
             place.
           </p>
+
+          {/* Inline Image */}
+          <div className="rounded-lg overflow-hidden shadow-md my-6">
+            <img
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=60"
+              alt="Beach near Juana Díaz"
+              className="w-full h-72 object-cover"
+            />
+          </div>
         </div>
 
+        {/* Footer CTA */}
         <footer className="mt-12 text-center">
           <a
             href="/directory"
