@@ -18,7 +18,7 @@ export default function ExplorePage() {
         {/* Hero Image */}
         <div className="mb-14">
           <img
-            src="https://images.unsplash.com/photo-2YLDQaAnJqU?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=60
+            src="https://images.unsplash.com/photo-2YLDQaAnJqU?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
 "
             alt="Juana Díaz landscape"
             className="w-full h-80 object-cover rounded-lg shadow-md"
