@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden rounded-3xl bg-gray-900 text-white">
       <Image
-        src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Plaza_Rom%C3%A1n_Baldorioty_de_Castro_-_Juana_Diaz%2C_PR_%282025%29-1.jpg?auto=format&fit=crop&w=1800&q=60"
+        src="src/app/Plaza_Román_Baldorioty_de_Castro_-_Juana_Diaz,_PR_(2025)-1.jpg?auto=format&fit=crop&w=1800&q=60"
         alt="Puerto Rico coastline"
         fill
         className="object-cover opacity-60"
