@@ -38,7 +38,7 @@ export default function ExplorePage() {
           {/* Inline Image */}
           <div className="rounded-lg overflow-hidden shadow-md my-6">
             <img
-              src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
+              src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=6"
               alt="Local street and culture"
               className="w-full h-72 object-cover"
             />
@@ -56,7 +56,7 @@ export default function ExplorePage() {
           {/* Inline Image */}
           <div className="rounded-lg overflow-hidden shadow-md my-6">
             <img
-              src="https://images.unsplash.com/photo-1600891963937-9605e2f5a52b?auto=format&fit=crop&w=1800&q=60"
+              src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
               alt="Puerto Rican food and dining"
               className="w-full h-72 object-cover"
             />
