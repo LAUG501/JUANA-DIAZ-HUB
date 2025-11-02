@@ -88,40 +88,6 @@ export default function HomePage() {
           </form>
         </div>
       </section>
-
-      <footer className="pt-10 pb-16 text-sm text-gray-600">
-        <div className="grid md:grid-cols-4 gap-6">
-          <div>
-            <div className="font-semibold mb-2">Juana Díaz Hub</div>
-            <p>Community directory, events, and resources for residents and visitors.</p>
-          </div>
-          <div>
-            <div className="font-semibold mb-2">Explore</div>
-            <ul className="space-y-1">
-              <li><Link href="/directory">Directory</Link></li>
-              <li><Link href="/events">Events</Link></li>
-              <li><Link href="/blog">Blog</Link></li>
-              <li><Link href="/map">City Map</Link></li>
-            </ul>
-          </div>
-          <div>
-            <div className="font-semibold mb-2">For Businesses</div>
-            <ul className="space-y-1">
-              <li><Link href="/directory/submit">List your business</Link></li>
-              <li><Link href="/ads">Advertising</Link></li>
-              <li><Link href="/partners">Partners</Link></li>
-            </ul>
-          </div>
-          <div>
-            <div className="font-semibold mb-2">Contact</div>
-            <ul className="space-y-1">
-              <li><a href="mailto:info@juanadiazhub.example">info@juanadiazhub.example</a></li>
-              <li>Juana Díaz, Puerto Rico</li>
-            </ul>
-          </div>
-        </div>
-        <div className="mt-8 text-center">© {new Date().getFullYear()} Juana Díaz Hub</div>
-      </footer>
     </div>
   );
 }
