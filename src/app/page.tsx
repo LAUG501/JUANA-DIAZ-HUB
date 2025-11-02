@@ -16,7 +16,7 @@ export default function HomePage() {
         <div className="grid gap-8 md:grid-cols-3">
           <Card
             title="Local Directory"
-            imageUrl="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60"
+            imageUrl="https://upload.wikimedia.org/wikipedia/commons/a/a6/Plaza_Rom%C3%A1n_Baldorioty_de_Castro_-_Juana_Diaz%2C_PR_%282025%29-1.jpg?auto=format&fit=crop&w=800&q=60"
             description="Browse local businesses, services, venues and community organizations."
           >
             <Link href="/directory" className="text-primary font-semibold">
@@ -26,7 +26,7 @@ export default function HomePage() {
 
           <Card
             title="Events Calendar"
-            imageUrl="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=60"
+            imageUrl="https://upload.wikimedia.org/wikipedia/commons/7/72/Juana_D%C3%ADaz_Pueblo%2C_Puerto_Rico.jpg?auto=format&fit=crop&w=800&q=60"
             description="Stay up to date with the latest community events and celebrations."
           >
             <Link href="/events" className="text-primary font-semibold">
