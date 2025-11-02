@@ -18,7 +18,7 @@ export default function ExplorePage() {
         {/* Hero Image */}
         <div className="mb-14">
           <img
-            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=60"
+            src="https://images.unsplash.com/photo-2YLDQaAnJqU?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
             alt="Juana Díaz landscape"
             className="w-full h-80 object-cover rounded-lg shadow-md"
           />
@@ -38,7 +38,7 @@ export default function ExplorePage() {
           {/* Inline Image */}
           <div className="rounded-lg overflow-hidden shadow-md my-6">
             <img
-              src="https://images.unsplash.com/photo-1601582586891-1f8e89d0f61e?auto=format&fit=crop&w=1800&q=60"
+              src="https://images.unsplash.com/photo-c8-XRo4a_VM?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
               alt="Local street and culture"
               className="w-full h-72 object-cover"
             />
