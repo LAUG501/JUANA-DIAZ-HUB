@@ -1,66 +1,89 @@
-'use client';
+import Hero from '@/components/Hero';
+import Card from '@/components/Card';
+import Link from 'next/link';
 import Image from 'next/image';
 
-export default function ExplorePage() {
+const slides = [
+  {
+    imageUrl: 'https://images.unsplash.com/photo-___YOUR_ISLAND_IMAGE1___?auto=format&fit=crop&w=2000&q=60',
+    caption: 'Welcome to Juana Díaz – Heart of the Community'
+  },
+  {
+    imageUrl: 'https://images.unsplash.com/photo-___YOUR_ISLAND_IMAGE2___?auto=format&fit=crop&w=2000&q=60',
+    caption: 'Discover local culture, heritage and coastal beauty'
+  },
+  {
+    imageUrl: 'https://images.unsplash.com/photo-___YOUR_ISLAND_IMAGE3___?auto=format&fit=crop&w=2000&q=60',
+    caption: 'Join events, meet your neighbors, and explore together'
+  },
+];
+
+export default function HomePage() {
   return (
-    <section className="bg-white text-gray-900 py-16 sm:py-24">
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-indigo-600 sm:text-5xl">
-            Explore Juana Díaz
-          </h1>
-          <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-            A vibrant community rich in history, culture, and natural beauty.
-          </p>
-        </header>
-
-        <div className="space-y-10 text-lg leading-relaxed text-gray-700">
-          <p>
-            Juana Díaz stands as a dynamic center of heritage and innovation on
-            Puerto Rico’s southern coast. The town blends traditional artistry
-            with modern enterprise, creating a unique environment where history
-            and progress coexist.
-          </p>
-
-          <Image
-            src="https://images.unsplash.com/photo-1584306673395-3bbf73791797?auto=format&fit=crop&w=1600&q=60"
-            alt="Local cuisine from Puerto Rico"
-            width={1200}
-            height={700}
-            className="rounded-xl shadow-md mx-auto"
-          />
-
-          <p>
-            The culinary scene captures the essence of local flavor—family-owned
-            restaurants serve dishes that celebrate generations of tradition.
-            Visitors can sample authentic Puerto Rican cuisine, explore cafés
-            along the plaza, or enjoy seafood prepared with coastal freshness.
-          </p>
-
-          <Image
-            src="https://upload.wikimedia.org/wikipedia/commons/3/31/Iglesia_de_San_Juan_Bautista_y_San_Ramon_Nonato_-_Juana_Diaz_Puerto_Rico.jpg"
-            alt="Juana Díaz downtown plaza"
-            width={1200}
-            height={700}
-            className="rounded-xl shadow-md mx-auto"
-          />
-
-          <p>
-            Beyond the town center, natural landmarks and cultural festivals
-            offer endless opportunities for discovery. Rivers, nearby beaches,
-            and mountain views invite both adventure and reflection.
-          </p>
-        </div>
-
-        <footer className="mt-12 text-center">
-          <a
-            href="/directory"
-            className="inline-block bg-indigo-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-indigo-600 transition"
-          >
-            Discover Local Businesses →
-          </a>
-        </footer>
+    <div className="min-h-screen bg-gray-50">
+      {/* Full-Width Hero Slider */}
+      <div className="relative w-full overflow-hidden">
+        {slides.map((slide, idx) => (
+          <div key={idx} className={`w-full h-screen relative ${idx === 0 ? '' : 'hidden'}`}>
+            <Image
+              src={slide.imageUrl}
+              alt={slide.caption}
+              layout="fill"
+              objectFit="cover"
+              className="brightness-75"
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <h1 className="text-white text-5xl font-bold text-center px-4">
+                {slide.caption}
+              </h1>
+            </div>
+          </div>
+        ))}
       </div>
-    </section>
+
+      {/* Login & Quick Access */}
+      <section className="bg-white py-12 px-6 lg:px-16 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="lg:w-1/2">
+          <h2 className="text-3xl font-heading mb-4">Sign In or Join Our Community</h2>
+          <p className="text-gray-600 mb-6">
+            Connect with locals, share your stories, and stay informed about Juana Díaz happenings.
+          </p>
+          <Link href="/login" className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-indigo-700 transition">
+            Login / Register →
+          </Link>
+        </div>
+        <div className="lg:w-1/2">
+          <Image
+            src="https://images.unsplash.com/photo-___YOUR_LOGIN_IMAGE___?auto=format&fit=crop&w=1200&q=60"
+            alt="Community login image"
+            width={1200}
+            height={800}
+            className="rounded-lg shadow-lg"
+          />
+        </div>
+      </section>
+
+      {/* Highlights Section */}
+      <section className="py-16 px-6 lg:px-16 bg-gray-100">
+        <h2 className="text-2xl font-heading mb-8 text-center">Discover Juana Díaz</h2>
+        <div className="grid gap-8 md:grid-cols-3">
+          <Card imageUrl="https://images.unsplash.com/photo-___IMAGE_DIR1___?auto=format&fit=crop&w=800&q=60">
+            <h3 className="text-xl font-heading mb-2">Directory</h3>
+            <p className="text-sm mb-4">Browse local businesses, services, venues and community organizations.</p>
+            <Link href="/directory" className="text-primary font-semibold">Explore Directory →</Link>
+          </Card>
+          <Card imageUrl="https://images.unsplash.com/photo-___IMAGE_DIR2___?auto=format&fit=crop&w=800&q=60">
+            <h3 className="text-xl font-heading mb-2">Events Calendar</h3>
+            <p className="text-sm mb-4">Stay up to date with upcoming festivals, classes, workshops and weekly challenges.</p>
+            <Link href="/event-calendar" className="text-primary font-semibold">View Calendar →</Link>
+          </Card>
+          <Card imageUrl="https://images.unsplash.com/photo-___IMAGE_DIR3___?auto=format&fit=crop&w=800&q=60">
+            <h3 className="text-xl font-heading mb-2">Stories & Guides</h3>
+            <p className="text-sm mb-4">Read blog posts, how-to guides and local stories to enrich your visit.</p>
+            <Link href="/blog" className="text-primary font-semibold">Read More →</Link>
+          </Card>
+        </div>
+      </section>
+    </div>
   );
 }
