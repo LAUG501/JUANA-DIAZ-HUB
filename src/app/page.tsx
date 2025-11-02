@@ -1,50 +1,127 @@
-import Hero from '@/components/Hero';
-import Card from '@/components/Card';
-import Link from 'next/link';
+// app/page.tsx
+import Hero from "../components/Hero";
+import Card from "../components/Card";
+import LoginSlider from "../components/LoginSlider";
+import MapDirections from "../components/MapDirections";
+import Link from "next/link";
 
-/**
- * Home page. Provides overview of Juana Diaz Hub.
- */
 export default function HomePage() {
   return (
-    <div className="space-y-16">
+    <div className="space-y-20">
       <Hero />
 
-      {/* Discover Section */}
       <section>
         <h2 className="text-3xl font-heading text-center mb-10">Discover Juana Díaz</h2>
         <div className="grid gap-8 md:grid-cols-3">
           <Card
             title="Local Directory"
-            imageUrl="https://upload.wikimedia.org/wikipedia/commons/a/a6/Plaza_Rom%C3%A1n_Baldorioty_de_Castro_-_Juana_Diaz%2C_PR_%282025%29-1.jpg?auto=format&fit=crop&w=800&q=60"
-            description="Browse local businesses, services, venues and community organizations."
-          >
-            <Link href="/directory" className="text-primary font-semibold">
-              Explore Directory →
-            </Link>
-          </Card>
-
+            imageUrl="https://upload.wikimedia.org/wikipedia/commons/a/a6/Plaza_Rom%C3%A1n_Baldorioty_de_Castro%2C_Juana_D%C3%ADaz%2C_Puerto_Rico.jpg"
+            description="Browse businesses, services, venues and community organizations."
+            href="/directory"
+          />
           <Card
             title="Events Calendar"
-            imageUrl="https://upload.wikimedia.org/wikipedia/commons/7/72/Juana_D%C3%ADaz_Pueblo%2C_Puerto_Rico.jpg?auto=format&fit=crop&w=800&q=60"
-            description="Stay up to date with the latest community events and celebrations."
-          >
-            <Link href="/events" className="text-primary font-semibold">
-              View Events →
-            </Link>
-          </Card>
-
+            imageUrl="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1400&q=60"
+            description="Festivals, sports, town meetings and live music—weekly."
+            href="/events"
+          />
           <Card
             title="Community Blog"
-            imageUrl="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=60"
-            description="Read stories, interviews, and updates from our vibrant community."
-          >
-            <Link href="/blog" className="text-primary font-semibold">
-              Visit Blog →
-            </Link>
-          </Card>
+            imageUrl="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1400&q=60"
+            description="Stories, interviews, spotlights and civic updates."
+            href="/blog"
+          />
         </div>
       </section>
+
+      <section className="grid md:grid-cols-3 gap-6">
+        <Card
+          title="City Services"
+          imageUrl="https://images.unsplash.com/photo-1482784160316-6eb046863ece?auto=format&fit=crop&w=1400&q=60"
+          description="Permits, utilities, forms and assistance programs."
+          href="/services"
+        />
+        <Card
+          title="Business Hub"
+          imageUrl="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=60"
+          description="Open a business, find resources, and grow with the community."
+          href="/business"
+        />
+        <Card
+          title="Parks & Culture"
+          imageUrl="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1400&q=60"
+          description="Explore plazas, beaches, and historic landmarks."
+          href="/culture"
+        />
+      </section>
+
+      <LoginSlider />
+
+      <section className="rounded-3xl bg-gray-900 text-white p-8 md:p-12">
+        <div className="grid md:grid-cols-4 gap-8">
+          <div><div className="text-4xl font-extrabold">78</div><div className="text-sm text-gray-300">Municipalities</div></div>
+          <div><div className="text-4xl font-extrabold">2.1K+</div><div className="text-sm text-gray-300">Businesses</div></div>
+          <div><div className="text-4xl font-extrabold">450+</div><div className="text-sm text-gray-300">Upcoming Events</div></div>
+          <div className="flex items-center">
+            <Link href="/directory/submit" className="rounded-xl bg-white text-gray-900 px-5 py-3 font-semibold">
+              Add Your Business
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <MapDirections />
+
+      <section className="rounded-3xl bg-gray-50 p-8 md:p-12">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h3 className="text-2xl font-semibold">Stay in the Loop</h3>
+            <p className="text-sm text-gray-600">
+              Weekly highlights of events, new businesses, job posts, and local alerts.
+            </p>
+          </div>
+          <form className="flex gap-3">
+            <input className="flex-1 rounded-lg border p-3" type="email" placeholder="you@email.com" />
+            <button className="rounded-lg bg-primary px-5 py-3 font-semibold text-white" type="submit">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <footer className="pt-10 pb-16 text-sm text-gray-600">
+        <div className="grid md:grid-cols-4 gap-6">
+          <div>
+            <div className="font-semibold mb-2">Juana Díaz Hub</div>
+            <p>Community directory, events, and resources for residents and visitors.</p>
+          </div>
+          <div>
+            <div className="font-semibold mb-2">Explore</div>
+            <ul className="space-y-1">
+              <li><Link href="/directory">Directory</Link></li>
+              <li><Link href="/events">Events</Link></li>
+              <li><Link href="/blog">Blog</Link></li>
+              <li><Link href="/map">City Map</Link></li>
+            </ul>
+          </div>
+          <div>
+            <div className="font-semibold mb-2">For Businesses</div>
+            <ul className="space-y-1">
+              <li><Link href="/directory/submit">List your business</Link></li>
+              <li><Link href="/ads">Advertising</Link></li>
+              <li><Link href="/partners">Partners</Link></li>
+            </ul>
+          </div>
+          <div>
+            <div className="font-semibold mb-2">Contact</div>
+            <ul className="space-y-1">
+              <li><a href="mailto:info@juanadiazhub.example">info@juanadiazhub.example</a></li>
+              <li>Juana Díaz, Puerto Rico</li>
+            </ul>
+          </div>
+        </div>
+        <div className="mt-8 text-center">© {new Date().getFullYear()} Juana Díaz Hub</div>
+      </footer>
     </div>
   );
 }
