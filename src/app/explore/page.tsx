@@ -18,7 +18,7 @@ export default function ExplorePage() {
         {/* Hero Image */}
         <div className="mb-14">
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Casa_Alcaldia_-_Juana_Diaz_Puerto_Rico.jpg=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
+            src="src/app/explore/Juana_Díaz_Pueblo,_Puerto_Rico.jpg=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
             alt="Juana Díaz landscape"
             className="w-full h-80 object-cover rounded-lg shadow-md"
           />
@@ -38,7 +38,7 @@ export default function ExplorePage() {
           {/* Inline Image */}
           <div className="rounded-lg overflow-hidden shadow-md my-6">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/72/Juana_D%C3%ADaz_Pueblo%2C_Puerto_Rico.jpg=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
+              src="src/app/explore/photo-1529333166437-7750a6dd5a70.jpg=rb-4.0.3&auto=format&fit=crop&w=1800&q=60"
               alt="Local street and culture"
               className="w-full h-72 object-cover"
             />
