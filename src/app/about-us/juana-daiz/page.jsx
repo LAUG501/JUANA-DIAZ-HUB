@@ -110,8 +110,18 @@ export default function JuanaDiazAbout() {
       <p>
       Culturally, Juana Díaz maintains a vibrant arts scene. The Festival de la Luz (Festival of Light) showcases contemporary art installations in historic buildings, while the Concurso de Canto Popular (Folk Singing Contest) highlights regional musical traditions. Moreover, the municipality has become a center for ecotourism, with guided tours of the Cueva de la Loma and hiking trails that highlight the karst topography.
       </p>
+            <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Suggested Visuals (replace the Unsplash URLs when you have your own)</h2>
+        <ul className="list-disc pl-6 space-y-2">
+          <li><strong>Pre‑colonial Taíno site:</strong> “Archaeological Taíno site” – rocks & petroglyphs (the Unsplash placeholder above)</li>
+          <li><strong>Spanish colonial settlement:</strong> “Historic colonial church” – the stone façade of the original church</li>
+          <li><strong>Downtown plaza:</strong> “Historic downtown plaza” – the central square with colonial façades</li>
+          <li><strong>Coffee plantation:</strong> “Coffee plantation in Juana Díaz” – rows of mature coffee bushes</li>
+          <li><strong>Cave exploration:</strong> “Cave exploration” – karst topography inside Cueva de la Loma</li>
+        </ul>
       </section>
-      <h2 className="text-2xl font-semibold"></h2>6. Conclusion: Juana Díaz as a Living Historical Narrative
+      </section>
+      <h2 className="text-2xl font-semibold">6. Conclusion: Juana Díaz as a Living Historical Narrative</h2>
       <p>
         Juana Díaz exemplifies the dynamic interplay between past and present. Its downtown preserves the architectural language of the colonial era, while its barrios illustrate adaptive strategies in response to economic and environmental shifts. The municipality’s history—from Taíno settlement to Spanish hacienda, from U.S. colonial administration to contemporary autonomy—offers rich insights into Puerto Rico’s broader narrative of resilience and reinvention.
       </p>
