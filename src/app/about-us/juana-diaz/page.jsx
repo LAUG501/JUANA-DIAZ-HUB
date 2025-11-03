@@ -213,7 +213,7 @@ export default function JuanaDiazAbout() {
       {/* 7. Suggested Visuals */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-indigo-600">
-          7. Suggested Visuals (replace the Unsplash URLs when you have your own)
+         Important facts you should know.
         </h2>
         <ul className="list-disc pl-6 space-y-2">
           <li>
