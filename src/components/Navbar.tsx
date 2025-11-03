@@ -22,7 +22,7 @@ export default function Navbar() {
     { href: "/directory", label: "Directory" },
     { href: "/event-calendar", label: "Events" },
     { href: "/blog", label: "Blog" },
-    { href: "/about-us/juana-diaz", label: "History" }, // ✅ History of
+    { href: "/about-us/juana-diaz/", label: "History" }, // ✅ History of
     { href: "/about-us", label: "About Us" },
     { href: "/contact", label: "Contact" },
   ];
