@@ -19,6 +19,7 @@ export default function Navbar() {
     { href: '/event-calendar', label: 'Events' },
     { href: '/blog', label: 'Blog' },
     { href: '/about-us', label: 'About' },
+    { href: '/about-us/juana-diaz', label: 'History' },
     { href: '/contact', label: 'Contact' }
   ];
 
