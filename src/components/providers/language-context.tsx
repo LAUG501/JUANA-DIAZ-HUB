@@ -61,6 +61,8 @@ type Dictionary = {
     closeMenu: string;
     dashboard: string;
     signOut: string;
+    lightMode: string;
+    darkMode: string;
   };
 };
 
@@ -85,7 +87,6 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         { href: "/directory", label: "Directory" },
         { href: "/event-calendar", label: "Events" },
         { href: "/blog", label: "Blog" },
-        { href: "/about-us/juana-diaz/", label: "History" },
         { href: "/about-us", label: "About Us" },
         { href: "/contact", label: "Contact" },
         { href: "/login", label: "Sign In" },
@@ -144,6 +145,8 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
       closeMenu: "Close navigation",
       dashboard: "Dashboard",
       signOut: "Sign out",
+      lightMode: "Switch to light mode",
+      darkMode: "Switch to dark mode",
     },
   },
   es: {
@@ -160,7 +163,6 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         { href: "/directory", label: "Directorio" },
         { href: "/event-calendar", label: "Eventos" },
         { href: "/blog", label: "Blog" },
-        { href: "/about-us/juana-diaz/", label: "Historia" },
         { href: "/about-us", label: "Sobre Nosotros" },
         { href: "/contact", label: "Contacto" },
         { href: "/login", label: "Iniciar Sesión" },
@@ -220,6 +222,8 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
       closeMenu: "Cerrar navegación",
       dashboard: "Panel",
       signOut: "Cerrar sesión",
+      lightMode: "Cambiar a modo claro",
+      darkMode: "Cambiar a modo oscuro",
     },
   },
 };
