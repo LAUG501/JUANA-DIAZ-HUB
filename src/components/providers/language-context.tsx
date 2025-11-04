@@ -14,6 +14,10 @@ type Dictionary = {
     brand: string;
     items: NavItem[];
     mobileMenuLabel: string;
+    searchPlaceholder: string;
+    panelTitle: string;
+    panelSubtitle: string;
+    panelGuestSubtitle: string;
   };
   footer: {
     tagline: string;
@@ -23,6 +27,15 @@ type Dictionary = {
     placeholder: string;
     subscribeCta: string;
     copyrightSuffix: string;
+    contactTitle: string;
+    contactEmailLabel: string;
+    contactPhoneLabel: string;
+    contactAddressLabel: string;
+    socialTitle: string;
+    resourcesTitle: string;
+    analyticsLink: string;
+    waitlistLink: string;
+    supportLink: string;
   };
   auth: {
     title: string;
@@ -63,6 +76,14 @@ type Dictionary = {
     signOut: string;
     lightMode: string;
     darkMode: string;
+    settings: string;
+    messages: string;
+    courses: string;
+    updates: string;
+    viewDashboard: string;
+    globalSettings: string;
+    searchPlaceholder: string;
+    noResults: string;
   };
 };
 
@@ -88,10 +109,17 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         { href: "/event-calendar", label: "Events" },
         { href: "/blog", label: "Blog" },
         { href: "/about-us", label: "About Us" },
+        { href: "/about-us/juana-diaz", label: "History" },
+        { href: "/waiting-list", label: "Waiting List" },
+        { href: "/analytics", label: "Analytics" },
         { href: "/contact", label: "Contact" },
         { href: "/login", label: "Sign In" },
       ],
       mobileMenuLabel: "Open menu",
+      searchPlaceholder: "Search navigation",
+      panelTitle: "Your hub",
+      panelSubtitle: "Welcome back, {name}!",
+      panelGuestSubtitle: "Sign in to unlock your personalized hub.",
     },
     footer: {
       tagline:
@@ -102,6 +130,15 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
       placeholder: "Email address",
       subscribeCta: "Subscribe",
       copyrightSuffix: "All rights reserved.",
+      contactTitle: "Contact",
+      contactEmailLabel: "Email",
+      contactPhoneLabel: "Phone",
+      contactAddressLabel: "Address",
+      socialTitle: "Social",
+      resourcesTitle: "Resources",
+      analyticsLink: "Community analytics",
+      waitlistLink: "Join the waitlist",
+      supportLink: "Support center",
     },
     auth: {
       title: "Welcome back",
@@ -147,6 +184,14 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
       signOut: "Sign out",
       lightMode: "Switch to light mode",
       darkMode: "Switch to dark mode",
+      settings: "Settings",
+      messages: "Messages",
+      courses: "Courses",
+      updates: "Updates",
+      viewDashboard: "View dashboard",
+      globalSettings: "Global preferences",
+      searchPlaceholder: "Search navigation",
+      noResults: "No matching pages yet.",
     },
   },
   es: {
@@ -164,10 +209,17 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         { href: "/event-calendar", label: "Eventos" },
         { href: "/blog", label: "Blog" },
         { href: "/about-us", label: "Sobre Nosotros" },
+        { href: "/about-us/juana-diaz", label: "Historia" },
+        { href: "/waiting-list", label: "Lista de espera" },
+        { href: "/analytics", label: "Analítica" },
         { href: "/contact", label: "Contacto" },
         { href: "/login", label: "Iniciar Sesión" },
       ],
       mobileMenuLabel: "Abrir menú",
+      searchPlaceholder: "Buscar en la navegación",
+      panelTitle: "Tu panel",
+      panelSubtitle: "Bienvenido de nuevo, {name}!",
+      panelGuestSubtitle: "Inicia sesión para activar tu panel personalizado.",
     },
     footer: {
       tagline:
@@ -179,6 +231,15 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
       placeholder: "Correo electrónico",
       subscribeCta: "Suscribirse",
       copyrightSuffix: "Todos los derechos reservados.",
+      contactTitle: "Contacto",
+      contactEmailLabel: "Correo",
+      contactPhoneLabel: "Teléfono",
+      contactAddressLabel: "Dirección",
+      socialTitle: "Redes",
+      resourcesTitle: "Recursos",
+      analyticsLink: "Analítica comunitaria",
+      waitlistLink: "Únete a la lista",
+      supportLink: "Centro de apoyo",
     },
     auth: {
       title: "Bienvenido de nuevo",
@@ -224,6 +285,14 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
       signOut: "Cerrar sesión",
       lightMode: "Cambiar a modo claro",
       darkMode: "Cambiar a modo oscuro",
+      settings: "Configuración",
+      messages: "Mensajes",
+      courses: "Cursos",
+      updates: "Actualizaciones",
+      viewDashboard: "Ver panel",
+      globalSettings: "Preferencias globales",
+      searchPlaceholder: "Buscar en la navegación",
+      noResults: "No hay páginas que coincidan.",
     },
   },
 };

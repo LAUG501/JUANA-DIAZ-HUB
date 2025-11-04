@@ -128,6 +128,7 @@ export default function CommunityPageTemplate({ content }: { content: CommunityP
                 fill
                 className="object-cover"
                 sizes="(min-width: 1024px) 320px, 100vw"
+                priority
               />
             </div>
           ) : null}

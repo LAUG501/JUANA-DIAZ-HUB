@@ -23,10 +23,11 @@ export default function Hero({ eyebrow, title, description, primaryAction, secon
         src="https://images.unsplash.com/photo-1526481280695-3c46917b11d4?auto=format&fit=crop&w=2200&q=80"
         alt="Juana Díaz coastline at sunset"
         fill
-        className="absolute inset-0 -z-10 object-cover opacity-40 mix-blend-luminosity"
+        className="absolute inset-0 -z-10 object-cover opacity-65"
         sizes="100vw"
         priority
       />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-slate-900/50 via-primary/40 to-secondary/30" aria-hidden />
       <div className="relative z-10 px-6 py-20 md:px-12 lg:px-16">
         <p className="eyebrow text-white/80">{eyebrow}</p>
         <h1 className="mt-3 text-4xl font-extrabold tracking-tight md:text-6xl">{title}</h1>

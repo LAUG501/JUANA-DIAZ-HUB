@@ -95,6 +95,14 @@ export default function JuanaDiazAbout() {
         <p className="muted mx-auto max-w-3xl md:mx-0">
           From pre-colonial Yaguana to a regional hub balancing modernization and heritage, Juana Díaz offers a window into Puerto Rico’s resilience and reinvention.
         </p>
+        <div className="space-y-4 text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <p>
+            Juana Díaz, a municipality in Puerto Rico’s western region, is a microcosm of the island’s broader historical trajectory. From its pre-colonial roots through Spanish settlement, the rise of a distinctive downtown, and subsequent outward expansion, the town illustrates how communities adapt to changing political, economic, and social forces while preserving a tangible cultural heritage.
+          </p>
+          <p>
+            The narrative of Juana Díaz is marked by resilience: Taíno legacies still present in place names, colonial architecture framing plazas, agro-industrial pivots powering livelihoods, and modern cultural festivals activating every barrio. This timeline honors that continuity while highlighting the moments that shaped today’s thriving municipality.
+          </p>
+        </div>
       </section>
 
       {historicalSections.map((section) => (

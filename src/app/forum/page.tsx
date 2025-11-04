@@ -23,12 +23,26 @@ const forumContent: Record<"en" | "es", {
   comingSoon: { title: string; description: string; ctaLabel: string; ctaHref: string };
   heroImage: { src: string; alt: string };
   footerCta: { text: string; href: string; label: string };
+  table: {
+    headers: string[];
+    rows: { topic: string; channel: string; replies: string; activity: string }[];
+  };
 }> = {
   en: {
     hero: {
       eyebrow: "Community forum",
       title: "Juana Díaz Community Forum",
       intro: "Welcome to the Juana Díaz forums — local connections, meet-ups, and community conversation.",
+    },
+    table: {
+      headers: ["Topic", "Channel", "Replies", "Activity"],
+      rows: [
+        { topic: "Reyes Parade logistics", channel: "Civic innovation", replies: "18", activity: "Updated 12m ago" },
+        { topic: "Artists needed for Plaza mural", channel: "Creative collabs", replies: "25", activity: "Updated 45m ago" },
+        { topic: "Vendor permits Q1", channel: "Business lab", replies: "9", activity: "Updated 2h ago" },
+        { topic: "Mutual aid pantry restock", channel: "Mutual aid", replies: "14", activity: "Updated 4h ago" },
+        { topic: "Community healing circle", channel: "Wellness circle", replies: "7", activity: "Updated 6h ago" },
+      ],
     },
     categories: [
       {
@@ -81,6 +95,16 @@ const forumContent: Record<"en" | "es", {
       eyebrow: "Foro comunitario",
       title: "Foro Comunitario de Juana Díaz",
       intro: "Bienvenido al foro de Juana Díaz — conecta con vecinos, organiza encuentros y comparte información.",
+    },
+    table: {
+      headers: ["Tema", "Canal", "Respuestas", "Actividad"],
+      rows: [
+        { topic: "Logística del Desfile de Reyes", channel: "Innovación cívica", replies: "18", activity: "Actualizado hace 12 min" },
+        { topic: "Artistas para mural en la plaza", channel: "Colaboraciones creativas", replies: "25", activity: "Actualizado hace 45 min" },
+        { topic: "Permisos de vendedores T1", channel: "Laboratorio de negocios", replies: "9", activity: "Actualizado hace 2 h" },
+        { topic: "Reabastecer la despensa solidaria", channel: "Ayuda mutua", replies: "14", activity: "Actualizado hace 4 h" },
+        { topic: "Círculo de sanación comunitaria", channel: "Círculo de bienestar", replies: "7", activity: "Actualizado hace 6 h" },
+      ],
     },
     categories: [
       {
@@ -141,6 +165,32 @@ export default function ForumPage() {
           <p className="eyebrow">{content.hero.eyebrow}</p>
           <h1 className="text-4xl font-semibold text-slate-900 dark:text-white">{content.hero.title}</h1>
           <p className="muted mx-auto max-w-2xl">{content.hero.intro}</p>
+        </div>
+      </section>
+
+      <section className="surface overflow-hidden">
+        <div className="overflow-x-auto rounded-3xl border border-slate-200/70 bg-white/80 shadow-sm dark:border-slate-800/60 dark:bg-slate-950/60">
+          <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-800">
+            <thead className="bg-slate-50/80 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-900/50 dark:text-slate-400">
+              <tr>
+                {content.table.headers.map((header) => (
+                  <th key={header} scope="col" className="px-6 py-3 text-left font-semibold">
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-200 text-sm dark:divide-slate-800">
+              {content.table.rows.map((row) => (
+                <tr key={row.topic} className="transition hover:bg-primary/5 dark:hover:bg-secondary/10">
+                  <td className="px-6 py-4 font-semibold text-slate-900 dark:text-white">{row.topic}</td>
+                  <td className="px-6 py-4 text-slate-600 dark:text-slate-300">{row.channel}</td>
+                  <td className="px-6 py-4 text-slate-600 dark:text-slate-300">{row.replies}</td>
+                  <td className="px-6 py-4 text-primary dark:text-secondary">{row.activity}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 
