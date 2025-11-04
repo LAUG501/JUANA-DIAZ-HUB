@@ -1,4 +1,4 @@
-Here’s an **updated and polished version** of your README that keeps all your original clarity but adds:
+Here’s an **updated and polished version** of the README that keeps original clarity but adds:
 
 * ✨ **Dark mode** mention throughout
 * 🇪🇸 **Full Spanish translation mode**
