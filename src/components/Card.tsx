@@ -5,40 +5,54 @@ import { ReactNode } from "react";
 
 export type CardProps = {
   title?: string;
+  eyebrow?: string;
   imageUrl?: string;
   description?: string;
   href?: string;
   children?: ReactNode;
+  ctaLabel?: string;
 };
 
-export default function Card({
-  title,
-  imageUrl,
-  description,
-  href,
-  children,
-}: CardProps) {
-  const Wrapper: any = href ? Link : "div";
-  const wrapperProps = href ? { href } : {};
-
-  return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-      {imageUrl && (
-        <div className="relative w-full h-48">
-          <Image src={imageUrl} alt={title ?? "image"} fill className="object-cover" priority />
+export default function Card({ title, eyebrow, imageUrl, description, href, children, ctaLabel }: CardProps) {
+  const content = (
+    <>
+      {imageUrl ? (
+        <div className="relative h-44 w-full overflow-hidden rounded-2xl">
+          <Image
+            src={imageUrl}
+            alt={title ?? "Card image"}
+            fill
+            className="object-cover"
+            sizes="(min-width: 1024px) 320px, 100vw"
+          />
         </div>
-      )}
-      <div className="p-6">
-        {title && <h3 className="text-xl font-semibold mb-2">{title}</h3>}
-        {description && <p className="text-sm text-gray-600 mb-4">{description}</p>}
-        {children ? (
-          children
-        ) : href ? (
-          <Wrapper {...wrapperProps} className="text-primary font-semibold">
-            Learn more →
-          </Wrapper>
+      ) : null}
+
+      <div className="flex flex-1 flex-col gap-3">
+        {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+        {title ? <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{title}</h3> : null}
+        {description ? <p className="muted">{description}</p> : null}
+        {children}
+        {href && !children ? (
+          <span className="mt-auto inline-flex items-center text-sm font-semibold text-primary transition hover:text-primary/80 dark:text-secondary dark:hover:text-secondary/80">
+            {ctaLabel ?? "Learn more →"}
+          </span>
         ) : null}
       </div>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link href={href} className="surface-card flex h-full flex-col gap-5">
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="surface-card flex h-full flex-col gap-5">
+      {content}
     </div>
   );
 }
