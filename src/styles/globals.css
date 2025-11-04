@@ -6,15 +6,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&family=Pacifico&display=swap');
 
 body {
-  @apply font-body bg-neutralLight text-neutralDark;
+  @apply font-body bg-neutralLight text-neutralDark transition-colors duration-300;
   line-height: 1.6;
 }
 
+.dark body {
+  @apply bg-slate-950 text-slate-100;
+}
+
 a {
-  @apply text-primary hover:underline;
+  @apply text-primary transition-colors hover:underline;
+}
+
+.dark a {
+  @apply text-secondary;
 }
 
 /* Utility classes for headings */
 h1, h2, h3, h4, h5, h6 {
-  @apply font-heading text-neutralDark;
+  @apply font-heading text-neutralDark dark:text-slate-100;
 }

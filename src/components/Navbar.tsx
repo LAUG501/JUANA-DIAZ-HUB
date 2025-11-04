@@ -1,101 +1,202 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import ThemeToggle from "./ThemeToggle";
+import LanguageToggle from "./LanguageToggle";
+import { useLanguage } from "./providers/language-context";
+
+type AuthenticatedUser = {
+  email: string;
+  name: string;
+  role: string;
+};
 
 /**
  * Navigation bar component.
- * Responsive, mobile-friendly with dropdown toggle.
- * Includes link to /about/juana-diaz page.
+ * Responsive, mobile-friendly with theme and language toggles.
  */
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [session, setSession] = useState<AuthenticatedUser | null>(null);
+  const [signingOut, setSigningOut] = useState(false);
+  const router = useRouter();
+  const { dictionary } = useLanguage();
 
-  const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/explore", label: "Explore" },
-    { href: "/forum", label: "Forum" },
-    { href: "/nightlife", label: "Nightlife" },
-    { href: "/culture", label: "Culture" },
-    { href: "/safety", label: "Safety" },
-    { href: "/travel-tips", label: "Travel Tips" },
-    { href: "/directory", label: "Directory" },
-    { href: "/event-calendar", label: "Events" },
-    { href: "/blog", label: "Blog" },
-    { href: "/about-us/juana-diaz/", label: "History" }, // ✅ History of
-    { href: "/about-us", label: "About Us" },
-    { href: "/contact", label: "Contact" },
-  ];
+  const navItems = dictionary.nav.items;
+  const { openMenu, closeMenu, dashboard, signOut: signOutLabel } = dictionary.actions;
+
+  useEffect(() => {
+    let active = true;
+    const fetchSession = async () => {
+      try {
+        const response = await fetch("/api/auth/session", {
+          cache: "no-store",
+        });
+        if (!active) return;
+        if (!response.ok) {
+          setSession(null);
+          return;
+        }
+        const data = (await response.json()) as { authenticated: boolean; user?: AuthenticatedUser };
+        if (data.authenticated && data.user) {
+          setSession(data.user);
+        } else {
+          setSession(null);
+        }
+      } catch (error) {
+        if (active) {
+          setSession(null);
+        }
+      }
+    };
+
+    fetchSession();
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const filteredNavItems = useMemo(() => {
+    if (!session) {
+      return navItems;
+    }
+    return navItems.filter((item) => item.href !== "/login");
+  }, [navItems, session]);
+
+  const handleSignOut = async () => {
+    setSigningOut(true);
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+      setSession(null);
+      setIsOpen(false);
+      router.push("/");
+      router.refresh();
+    } finally {
+      setSigningOut(false);
+    }
+  };
 
   return (
-    <nav className="bg-white text-gray-800 shadow-md fixed top-0 left-0 right-0 z-50">
-      <div className="container mx-auto flex items-center justify-between p-4">
-        {/* Logo */}
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200/60 bg-white/80 text-slate-900 shadow-sm backdrop-blur-sm dark:border-slate-800/60 dark:bg-slate-950/70 dark:text-slate-100">
+      <div className="container mx-auto flex items-center justify-between px-4 py-3">
         <Link
           href="/"
-          className="text-2xl font-bold font-accent text-indigo-700 tracking-tight hover:text-indigo-500 transition"
+          className="text-xl font-heading font-semibold tracking-tight text-slate-900 transition hover:text-primary dark:text-white dark:hover:text-secondary"
         >
-          Juana Díaz Hub
+          {dictionary.nav.brand}
         </Link>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-6 text-sm font-medium">
-          {navItems.map((item) => (
+        <ul className="hidden items-center gap-6 text-sm font-medium md:flex">
+          {filteredNavItems.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="hover:text-indigo-600 transition-colors"
+                className="rounded-full px-3 py-2 transition-colors hover:bg-primary/10 hover:text-primary dark:hover:bg-secondary/10 dark:hover:text-secondary"
               >
                 {item.label}
               </Link>
             </li>
           ))}
+          {session && (
+            <li>
+              <Link
+                href="/dashboard"
+                className="rounded-full px-3 py-2 transition-colors hover:bg-primary/10 hover:text-primary dark:hover:bg-secondary/10 dark:hover:text-secondary"
+              >
+                {dashboard}
+              </Link>
+            </li>
+          )}
         </ul>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-indigo-700 focus:outline-none"
-        >
-          {isOpen ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+        <div className="flex items-center gap-2">
+          <LanguageToggle />
+          <ThemeToggle />
+          {session ? (
+            <button
+              onClick={handleSignOut}
+              disabled={signingOut}
+              className="hidden rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-white md:inline-flex dark:border-slate-700 dark:text-slate-200 dark:hover:border-secondary dark:hover:text-secondary dark:focus:ring-secondary dark:focus:ring-offset-slate-950 disabled:cursor-not-allowed disabled:opacity-70"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 16h16" />
-            </svg>
-          )}
-        </button>
+              {signingOut ? "..." : signOutLabel}
+            </button>
+          ) : null}
+          <button
+            onClick={() => setIsOpen((prev) => !prev)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-white md:hidden dark:border-slate-700 dark:text-slate-200 dark:hover:border-secondary dark:hover:text-secondary dark:focus:ring-secondary dark:focus:ring-offset-slate-950"
+            aria-expanded={isOpen}
+            aria-label={isOpen ? closeMenu : openMenu}
+          >
+            {isOpen ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={1.5}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={1.5}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 8h16M4 16h16" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <ul className="md:hidden bg-white border-t border-gray-200 px-6 py-4 space-y-3 text-sm font-medium shadow-sm">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className="block text-gray-800 hover:text-indigo-600 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="md:hidden border-t border-slate-200 bg-white/90 px-6 pb-6 pt-4 shadow-lg dark:border-slate-800 dark:bg-slate-950/90">
+          <div className="flex items-center justify-end gap-3 pb-4">
+            <LanguageToggle />
+            <ThemeToggle />
+          </div>
+          <ul className="space-y-2 text-sm font-medium">
+            {filteredNavItems.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="block rounded-xl px-4 py-2 transition-colors hover:bg-primary/10 hover:text-primary dark:hover:bg-secondary/10 dark:hover:text-secondary"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+            {session && (
+              <li>
+                <Link
+                  href="/dashboard"
+                  className="block rounded-xl px-4 py-2 transition-colors hover:bg-primary/10 hover:text-primary dark:hover:bg-secondary/10 dark:hover:text-secondary"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {dashboard}
+                </Link>
+              </li>
+            )}
+          </ul>
+          {session && (
+            <button
+              onClick={handleSignOut}
+              disabled={signingOut}
+              className="mt-4 w-full rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-white dark:border-slate-700 dark:text-slate-200 dark:hover:border-secondary dark:hover:text-secondary dark:focus:ring-secondary dark:focus:ring-offset-slate-950 disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              {signingOut ? "..." : signOutLabel}
+            </button>
+          )}
+        </div>
       )}
     </nav>
   );

@@ -42,17 +42,46 @@ The Tailwind configuration defines a set of custom colors and fonts to align wit
 
 ## Features Implemented
 
-Although the project skeleton does not yet include full back‑end integration, it establishes a comprehensive foundation for further development. Key features include:
+-The project now ships with a lightweight back‑end for secure administrator sign‑in, while still providing a strong foundation for future expansion. Key features include:
 
 - **Multi‑page routing** with 30+ pages covering home, explore, forum, nightlife, culture, safety, travel tips, directory with subcategories, learning hub, events, blog, guides, stories, gallery, videos, news, notices, weather alerts, user dashboard, profile, legal pages and sitemap.
 - **Reusable components** for navigation, footers, cards and hero sections.
 - **Responsive design** using Tailwind’s grid system and mobile-first utilities.
 - **Accessibility considerations** such as semantic HTML and descriptive text.
+- **Admin authentication** powered by signed HTTP‑only cookies, including login/logout API routes and protected dashboard access.
+
+## Configuring Admin Access
+
+1. Copy `.env.example` to `.env.local` and populate the values:
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   | Variable | Description |
+   | --- | --- |
+   | `AUTH_SECRET` | Random string used to sign session cookies (generate with `openssl rand -hex 32`). |
+   | `ADMIN_EMAIL` | Email address required to sign in as the administrator. |
+   | `ADMIN_NAME` | Optional friendly display name shown on the dashboard. |
+   | `ADMIN_PASSWORD_HASH` | SHA‑256 hash of the admin password (recommended). |
+   | `ADMIN_PASSWORD` | Plaintext password alternative if a hash is not provided. |
+
+   To generate a SHA‑256 hash for `ADMIN_PASSWORD_HASH` run:
+
+   ```bash
+   node -e "console.log(require('crypto').createHash('sha256').update('your-password').digest('hex'))"
+   ```
+
+2. Restart the development server so Next.js can read the environment variables.
+
+3. Visit `/login`, enter the configured admin email/password, and you will be redirected to the protected dashboard.
+
+The login form also provides context in English and Spanish, live password strength hints, and disabled placeholders for future social sign‑in providers (Google/Facebook) that can be wired up once OAuth credentials are available.
 
 ## Extending This Project
 
 - Integrate a headless CMS (e.g. Contentful) to dynamically source content for directory listings, blog posts, events and more.
-- Implement **authentication** with NextAuth to support user accounts, dashboards and forum interactions.
+- Expand the authentication system with database-backed user accounts, role management and OAuth providers.
 - Build out **API routes** under `src/app/api` for forum posts, event submissions and directory search.
 - Connect external services such as **Google Maps** for location information and **Mailchimp** for newsletter subscriptions.
 
