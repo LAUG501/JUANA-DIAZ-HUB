@@ -13,6 +13,7 @@ type AuthenticatedUser = {
   email: string;
   name: string;
   role: string;
+  locale?: string;
 };
 
 type ToolbarIcon = "home" | "explore" | "events" | "forum" | "messages";
@@ -72,12 +73,8 @@ export default function UserToolbar() {
           setSession(null);
           return;
         }
-        const data = (await response.json()) as { authenticated: boolean; user?: AuthenticatedUser };
-        if (data.authenticated && data.user) {
-          setSession(data.user);
-        } else {
-          setSession(null);
-        }
+        const data = (await response.json()) as { user: AuthenticatedUser | null };
+        setSession(data.user ?? null);
       } catch {
         if (active) setSession(null);
       }

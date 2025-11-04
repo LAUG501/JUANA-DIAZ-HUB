@@ -61,6 +61,12 @@ type Dictionary = {
     facebook: string;
     noAccount: string;
     createAccount: string;
+    ssoTitle: string;
+    ssoSubtitle: string;
+    manualTitle: string;
+    manualSubtitle: string;
+    tiktok: string;
+    oauthError: string;
     passwordStrength: string;
     weak: string;
     medium: string;
@@ -128,6 +134,50 @@ type Dictionary = {
       globalSettings: string;
     };
   };
+  forum: {
+    hero: {
+      eyebrow: string;
+      title: string;
+      description: string;
+    };
+    list: {
+      activeTitle: string;
+      replyLabel: string;
+      likeLabel: string;
+      empty: string;
+    };
+    composer: {
+      title: string;
+      description: string;
+      titleLabel: string;
+      titlePlaceholder: string;
+      summaryLabel: string;
+      summaryPlaceholder: string;
+      detailsLabel: string;
+      detailsPlaceholder: string;
+      submit: string;
+      submitting: string;
+      error: string;
+    };
+    reply: {
+      title: string;
+      description: string;
+      placeholder: string;
+      submit: string;
+      submitting: string;
+      error: string;
+    };
+    thread: {
+      eyebrow: string;
+      hostedBy: string;
+      pinned: string;
+    };
+    like: {
+      label: string;
+      likedLabel: string;
+      error: string;
+    };
+  };
 };
 
 type LanguageContextValue = {
@@ -157,6 +207,8 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         { href: "/waiting-list", label: "Waiting List" },
         { href: "/analytics", label: "Analytics" },
         { href: "/ai-assistant", label: "AI Assistant" },
+        { href: "/ai-lab", label: "AI Lab" },
+        { href: "/school", label: "School" },
         { href: "/contact", label: "Contact" },
         { href: "/login", label: "Sign In" },
       ],
@@ -199,8 +251,13 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
       orContinue: "Or continue with",
       google: "Google",
       facebook: "Facebook",
+      tiktok: "TikTok",
       noAccount: "Don't have an account?",
       createAccount: "Create one",
+      ssoTitle: "Single sign-on",
+      ssoSubtitle: "Use a trusted provider to unlock your learning hub instantly.",
+      manualTitle: "Use your community credentials",
+      manualSubtitle: "Administrators can also sign in with their secure password.",
       passwordStrength: "Password strength",
       weak: "Weak",
       medium: "Medium",
@@ -219,6 +276,7 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
       notConfigured: "Admin login is not configured yet. Contact your developer.",
       serverError: "We couldn't complete your request. Try again shortly.",
       contactAdmin: "Contact support to reset your access.",
+      oauthError: "We couldn't complete the single sign-on flow. Try again or use credentials.",
     },
     actions: {
       themeToggle: "Toggle theme",
@@ -277,6 +335,51 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         globalSettings: "Settings & privacy",
       },
     },
+    forum: {
+      hero: {
+        eyebrow: "Community forum",
+        title: "Build in public, together",
+        description:
+          "Swap ideas, share progress, and learn from neighbors accelerating Juana Díaz with AI, design, and civic action.",
+      },
+      list: {
+        activeTitle: "Active threads",
+        replyLabel: "{count} replies",
+        likeLabel: "{count} appreciations",
+        empty: "Be the first to spark a conversation!",
+      },
+      composer: {
+        title: "Start a new conversation",
+        description: "Share what you are building with AI, ask for collaborators, or announce a community project.",
+        titleLabel: "Title",
+        titlePlaceholder: "Share your AI-powered idea",
+        summaryLabel: "Summary",
+        summaryPlaceholder: "One-line overview for readers",
+        detailsLabel: "Details",
+        detailsPlaceholder: "Describe your question, share resources, or invite collaboration.",
+        submit: "Publish thread",
+        submitting: "Posting...",
+        error: "Unable to create thread.",
+      },
+      reply: {
+        title: "Add your voice",
+        description: "Keep it respectful and actionable for fellow builders.",
+        placeholder: "Share updates, attach links, or encourage next steps.",
+        submit: "Post reply",
+        submitting: "Posting...",
+        error: "Unable to post reply.",
+      },
+      thread: {
+        eyebrow: "Community thread",
+        hostedBy: "Hosted by {name}",
+        pinned: "Pinned conversation starter",
+      },
+      like: {
+        label: "Appreciate · {count}",
+        likedLabel: "Appreciated · {count}",
+        error: "Unable to update appreciation.",
+      },
+    },
   },
   es: {
     nav: {
@@ -298,6 +401,8 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         { href: "/waiting-list", label: "Lista de espera" },
         { href: "/analytics", label: "Analítica" },
         { href: "/ai-assistant", label: "Asistente IA" },
+        { href: "/ai-lab", label: "Laboratorio IA" },
+        { href: "/school", label: "Escuela" },
         { href: "/contact", label: "Contacto" },
         { href: "/login", label: "Iniciar Sesión" },
       ],
@@ -341,8 +446,13 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
       orContinue: "O continúa con",
       google: "Google",
       facebook: "Facebook",
+      tiktok: "TikTok",
       noAccount: "¿No tienes una cuenta?",
       createAccount: "Crea una",
+      ssoTitle: "Inicio de sesión unificado",
+      ssoSubtitle: "Conéctate con un proveedor confiable y accede al instante.",
+      manualTitle: "Usa tus credenciales comunitarias",
+      manualSubtitle: "Los administradores también pueden ingresar con su contraseña segura.",
       passwordStrength: "Fortaleza de la contraseña",
       weak: "Débil",
       medium: "Media",
@@ -361,6 +471,7 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
       notConfigured: "El acceso de administrador aún no está configurado. Contacta al desarrollador.",
       serverError: "No pudimos completar tu solicitud. Intenta más tarde.",
       contactAdmin: "Contacta soporte para restablecer tu acceso.",
+      oauthError: "No pudimos completar el acceso con proveedor. Intenta otra vez o usa tus credenciales.",
     },
     actions: {
       themeToggle: "Cambiar tema",
@@ -417,6 +528,51 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         assistant: "Asistente IA",
         newLabel: "Nuevo",
         globalSettings: "Configuración y privacidad",
+      },
+    },
+    forum: {
+      hero: {
+        eyebrow: "Foro comunitario",
+        title: "Construyan en público, juntos",
+        description:
+          "Intercambia ideas, comparte avances y aprende de vecinas que impulsan Juana Díaz con IA, diseño y acción cívica.",
+      },
+      list: {
+        activeTitle: "Conversaciones activas",
+        replyLabel: "{count} respuestas",
+        likeLabel: "{count} reconocimientos",
+        empty: "¡Sé la primera persona en iniciar una conversación!",
+      },
+      composer: {
+        title: "Inicia una nueva conversación",
+        description: "Comparte lo que construyes con IA, busca colaboradoras o anuncia un proyecto comunitario.",
+        titleLabel: "Título",
+        titlePlaceholder: "Comparte tu idea impulsada por IA",
+        summaryLabel: "Resumen",
+        summaryPlaceholder: "Una línea para despertar interés",
+        detailsLabel: "Detalles",
+        detailsPlaceholder: "Describe tu pregunta, comparte recursos o invita a colaborar.",
+        submit: "Publicar hilo",
+        submitting: "Publicando...",
+        error: "No se pudo crear el hilo.",
+      },
+      reply: {
+        title: "Añade tu voz",
+        description: "Mantén el respeto y brinda pasos accionables para otras personas constructoras.",
+        placeholder: "Comparte actualizaciones, enlaces o próximos pasos.",
+        submit: "Publicar respuesta",
+        submitting: "Publicando...",
+        error: "No se pudo publicar la respuesta.",
+      },
+      thread: {
+        eyebrow: "Conversación comunitaria",
+        hostedBy: "Organizado por {name}",
+        pinned: "Inicio de conversación destacado",
+      },
+      like: {
+        label: "Apreciar · {count}",
+        likedLabel: "Apreciado · {count}",
+        error: "No se pudo actualizar el reconocimiento.",
       },
     },
   },

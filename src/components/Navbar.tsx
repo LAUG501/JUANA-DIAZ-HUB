@@ -193,6 +193,7 @@ type AuthenticatedUser = {
   email: string;
   name: string;
   role: string;
+  locale?: string;
 };
 
 /**
@@ -225,12 +226,8 @@ export default function Navbar() {
           setSession(null);
           return;
         }
-        const data = (await response.json()) as { authenticated: boolean; user?: AuthenticatedUser };
-        if (data.authenticated && data.user) {
-          setSession(data.user);
-        } else {
-          setSession(null);
-        }
+        const data = (await response.json()) as { user: AuthenticatedUser | null };
+        setSession(data.user ?? null);
       } catch (error) {
         if (active) {
           setSession(null);

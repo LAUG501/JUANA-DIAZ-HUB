@@ -1,0 +1,214 @@
+import "server-only";
+
+import crypto from "crypto";
+import { readDatabase, writeDatabase, withTimestamps, type ForumPostRecord, type ForumThreadRecord } from "./database";
+import { findUserByEmail, createUser } from "./user-service";
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "")
+    .slice(0, 60);
+}
+
+async function seedForum() {
+  const db = await readDatabase();
+  if (db.forumThreads.length > 0) {
+    return;
+  }
+
+  const systemUserEmail = "community@juana-diaz-hub.local";
+  let systemUser = await findUserByEmail(systemUserEmail);
+  if (!systemUser) {
+    systemUser = await createUser({
+      email: systemUserEmail,
+      name: "Community Manager",
+      provider: "credentials",
+      providerId: `seed:${systemUserEmail}`,
+      locale: "en",
+    });
+  }
+
+  const thread: ForumThreadRecord = withTimestamps({
+    id: crypto.randomUUID(),
+    title: "Welcome to the Juana Díaz learning circle",
+    slug: slugify("Welcome to the Juana Díaz learning circle"),
+    authorId: systemUser.id,
+    summary:
+      "Share what you are building with AI, ask for feedback, and swap resources with neighbors and diaspora mentors.",
+  });
+
+  const post: ForumPostRecord = withTimestamps({
+    id: crypto.randomUUID(),
+    threadId: thread.id,
+    authorId: systemUser.id,
+    content:
+      "This space keeps our community grounded in mutual support. Introduce yourself, mention your project, and tag it so others can discover and collaborate.",
+  });
+
+  db.forumThreads.push(thread);
+  db.forumPosts.push(post);
+  await writeDatabase(db);
+}
+
+export type ThreadSummary = {
+  id: string;
+  title: string;
+  slug: string;
+  summary: string;
+  authorName: string;
+  replyCount: number;
+  likeCount: number;
+  createdAt: string;
+};
+
+export type ThreadDetail = ThreadSummary & {
+  posts: Array<{
+    id: string;
+    authorName: string;
+    content: string;
+    createdAt: string;
+  }>;
+  likedByViewer: boolean;
+};
+
+export async function listThreads(): Promise<ThreadSummary[]> {
+  await seedForum();
+  const db = await readDatabase();
+  const users = new Map(db.users.map((user) => [user.id, user]));
+  return db.forumThreads
+    .slice()
+    .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+    .map((thread) => {
+      const posts = db.forumPosts.filter((post) => post.threadId === thread.id);
+      const likes = db.forumLikes.filter((like) => like.threadId === thread.id);
+      const author = users.get(thread.authorId);
+      return {
+        id: thread.id,
+        title: thread.title,
+        slug: thread.slug,
+        summary: thread.summary,
+        authorName: author?.name ?? "Community member",
+        replyCount: Math.max(posts.length - 1, 0),
+        likeCount: likes.length,
+        createdAt: thread.createdAt,
+      } satisfies ThreadSummary;
+    });
+}
+
+export async function getThreadBySlug(slug: string, viewerId?: string): Promise<ThreadDetail | null> {
+  const db = await readDatabase();
+  const thread = db.forumThreads.find((item) => item.slug === slug);
+  if (!thread) {
+    return null;
+  }
+  const users = new Map(db.users.map((user) => [user.id, user]));
+  const posts = db.forumPosts
+    .filter((post) => post.threadId === thread.id)
+    .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+    .map((post) => ({
+      id: post.id,
+      authorName: users.get(post.authorId)?.name ?? "Community member",
+      content: post.content,
+      createdAt: post.createdAt,
+    }));
+  const likes = db.forumLikes.filter((like) => like.threadId === thread.id);
+  const author = users.get(thread.authorId);
+  return {
+    id: thread.id,
+    title: thread.title,
+    slug: thread.slug,
+    summary: thread.summary,
+    authorName: author?.name ?? "Community member",
+    replyCount: Math.max(posts.length - 1, 0),
+    likeCount: likes.length,
+    createdAt: thread.createdAt,
+    posts,
+    likedByViewer: viewerId ? likes.some((like) => like.userId === viewerId) : false,
+  } satisfies ThreadDetail;
+}
+
+export async function createThread({
+  title,
+  summary,
+  content,
+  authorId,
+}: {
+  title: string;
+  summary: string;
+  content: string;
+  authorId: string;
+}) {
+  const db = await readDatabase();
+  const thread: ForumThreadRecord = withTimestamps({
+    id: crypto.randomUUID(),
+    title,
+    summary,
+    slug: slugify(title),
+    authorId,
+  });
+  const post: ForumPostRecord = withTimestamps({
+    id: crypto.randomUUID(),
+    threadId: thread.id,
+    authorId,
+    content,
+  });
+  db.forumThreads.push(thread);
+  db.forumPosts.push(post);
+  await writeDatabase(db);
+  return thread;
+}
+
+export async function createReply({
+  threadId,
+  content,
+  authorId,
+}: {
+  threadId: string;
+  content: string;
+  authorId: string;
+}) {
+  const db = await readDatabase();
+  const reply: ForumPostRecord = withTimestamps({
+    id: crypto.randomUUID(),
+    threadId,
+    authorId,
+    content,
+  });
+  db.forumPosts.push(reply);
+  const thread = db.forumThreads.find((item) => item.id === threadId);
+  if (thread) {
+    thread.updatedAt = new Date().toISOString();
+  }
+  await writeDatabase(db);
+  return reply;
+}
+
+export async function toggleThreadLike({
+  threadId,
+  userId,
+}: {
+  threadId: string;
+  userId: string;
+}): Promise<{ liked: boolean; count: number }> {
+  const db = await readDatabase();
+  const existing = db.forumLikes.find((like) => like.threadId === threadId && like.userId === userId);
+  let liked = false;
+  if (existing) {
+    db.forumLikes = db.forumLikes.filter((like) => like.id !== existing.id);
+    liked = false;
+  } else {
+    db.forumLikes.push(
+      withTimestamps({
+        id: crypto.randomUUID(),
+        threadId,
+        userId,
+      }),
+    );
+    liked = true;
+  }
+  await writeDatabase(db);
+  const count = db.forumLikes.filter((like) => like.threadId === threadId).length;
+  return { liked, count };
+}

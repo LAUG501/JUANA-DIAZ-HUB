@@ -1,61 +1,43 @@
-import { NextResponse } from "next/server";
-import {
-  createSessionCookie,
-  getAdminConfig,
-  validateAdminCredentials,
-} from "../../../../lib/auth";
+import { NextRequest } from "next/server";
+import { createSession, hashPassword, verifyPassword } from "../../../../lib/auth";
+import { ensureAdminAccount, findUserByEmail, updateUser, createUser } from "../../../../lib/user-service";
 
-type LoginRequest = {
-  email?: string;
-  password?: string;
-};
-
-type ErrorCode =
-  | "MISSING_FIELDS"
-  | "INVALID_CREDENTIALS"
-  | "NOT_CONFIGURED"
-  | "SERVER_ERROR";
-
-function errorResponse(code: ErrorCode, status: number) {
-  return NextResponse.json({ error: code }, { status });
-}
-
-export async function POST(request: Request) {
-  let body: LoginRequest;
-  try {
-    body = await request.json();
-  } catch (error) {
-    return errorResponse("MISSING_FIELDS", 400);
+export async function POST(request: NextRequest) {
+  const body = await request.json().catch(() => null) as { email?: string; password?: string; name?: string } | null;
+  if (!body?.email || !body?.password) {
+    return new Response(JSON.stringify({ error: "Missing credentials" }), { status: 400 });
   }
 
-  const email = body.email?.trim();
-  const password = body.password;
+  await ensureAdminAccount();
 
-  if (!email || !password) {
-    return errorResponse("MISSING_FIELDS", 400);
+  const email = body.email.toLowerCase();
+  const user = await findUserByEmail(email);
+
+  if (!user) {
+    if (process.env.ALLOW_SELF_SERVICE_SIGNUP === "true") {
+      const hashed = hashPassword(body.password);
+      const created = await createUser({
+        email,
+        name: body.name ?? email.split("@")[0],
+        passwordHash: hashed,
+        provider: "credentials",
+        providerId: `credentials:${email}`,
+        locale: "en",
+      });
+      await createSession(created.id);
+      return Response.json({ ok: true, user: { id: created.id, name: created.name, role: created.role } });
+    }
+    return new Response(JSON.stringify({ error: "Account not found" }), { status: 404 });
   }
 
-  const adminConfig = getAdminConfig();
-  if (!adminConfig) {
-    return errorResponse("NOT_CONFIGURED", 503);
+  if (!verifyPassword(body.password, user.passwordHash)) {
+    return new Response(JSON.stringify({ error: "Invalid credentials" }), { status: 403 });
   }
 
-  const isValid = validateAdminCredentials(email, password);
-  if (!isValid) {
-    return errorResponse("INVALID_CREDENTIALS", 401);
+  if (body.name && body.name !== user.name) {
+    await updateUser(user.id, { name: body.name });
   }
 
-  try {
-    const response = NextResponse.json({
-      user: {
-        email: adminConfig.email,
-        name: adminConfig.name,
-        role: adminConfig.role,
-      },
-    });
-    response.cookies.set(createSessionCookie(adminConfig));
-    return response;
-  } catch (error) {
-    return errorResponse("SERVER_ERROR", 500);
-  }
+  await createSession(user.id);
+  return Response.json({ ok: true, user: { id: user.id, name: user.name, role: user.role } });
 }

@@ -1,5 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useMemo } from "react";
+
+import { useLanguage } from "./providers/language-context";
+import { useContentOverrides } from "../hooks/useContentOverrides";
 
 export type ContentItem = {
   title: string;
@@ -89,8 +95,145 @@ function ActionButton({ label, href, variant = "primary" }: { label: string; hre
   );
 }
 
-export default function CommunityPageTemplate({ content }: { content: CommunityPageContent }) {
-  const { hero, sections, spotlight, resources, faqs, footerNote } = content;
+type Props = {
+  pageKey: string;
+  content: CommunityPageContent;
+};
+
+type OverrideMap = Record<string, string>;
+
+function hasOverride(overrides: OverrideMap, key: string) {
+  return Object.prototype.hasOwnProperty.call(overrides, key);
+}
+
+function getOverride<T extends string | undefined>(overrides: OverrideMap, key: string, fallback: T): T {
+  if (hasOverride(overrides, key)) {
+    return overrides[key] as T;
+  }
+  return fallback;
+}
+
+function applyOverrides(content: CommunityPageContent, overrides: OverrideMap): CommunityPageContent {
+  const hero = {
+    ...content.hero,
+    eyebrow: getOverride(overrides, "hero.eyebrow", content.hero.eyebrow),
+    title: getOverride(overrides, "hero.title", content.hero.title),
+    description: getOverride(overrides, "hero.description", content.hero.description),
+    image: content.hero.image
+      ? {
+          ...content.hero.image,
+          src: getOverride(overrides, "hero.image.src", content.hero.image.src),
+          alt: getOverride(overrides, "hero.image.alt", content.hero.image.alt),
+        }
+      : undefined,
+    stats: content.hero.stats?.map((metric, metricIndex) => ({
+      ...metric,
+      value: getOverride(overrides, `hero.stats.${metricIndex}.value`, metric.value),
+      label: getOverride(overrides, `hero.stats.${metricIndex}.label`, metric.label),
+      description: getOverride(overrides, `hero.stats.${metricIndex}.description`, metric.description),
+    })),
+    actions: content.hero.actions?.map((action, actionIndex) => ({
+      ...action,
+      label: getOverride(overrides, `hero.actions.${actionIndex}.label`, action.label),
+      href: getOverride(overrides, `hero.actions.${actionIndex}.href`, action.href),
+    })),
+  } satisfies CommunityPageContent["hero"];
+
+  const sections = content.sections?.map((section, sectionIndex) => ({
+    ...section,
+    eyebrow: getOverride(overrides, `sections.${sectionIndex}.eyebrow`, section.eyebrow),
+    title: getOverride(overrides, `sections.${sectionIndex}.title`, section.title),
+    description: getOverride(overrides, `sections.${sectionIndex}.description`, section.description),
+    items: section.items?.map((item, itemIndex) => ({
+      ...item,
+      badge: getOverride(overrides, `sections.${sectionIndex}.items.${itemIndex}.badge`, item.badge),
+      title: getOverride(overrides, `sections.${sectionIndex}.items.${itemIndex}.title`, item.title),
+      description: getOverride(overrides, `sections.${sectionIndex}.items.${itemIndex}.description`, item.description),
+      href: getOverride(overrides, `sections.${sectionIndex}.items.${itemIndex}.href`, item.href),
+    })),
+    bullets: section.bullets?.map((bullet, bulletIndex) =>
+      getOverride(overrides, `sections.${sectionIndex}.bullets.${bulletIndex}`, bullet),
+    ),
+    metrics: section.metrics?.map((metric, metricIndex) => ({
+      ...metric,
+      value: getOverride(overrides, `sections.${sectionIndex}.metrics.${metricIndex}.value`, metric.value),
+      label: getOverride(overrides, `sections.${sectionIndex}.metrics.${metricIndex}.label`, metric.label),
+      description: getOverride(
+        overrides,
+        `sections.${sectionIndex}.metrics.${metricIndex}.description`,
+        metric.description,
+      ),
+    })),
+    callout: section.callout
+      ? {
+          ...section.callout,
+          title: getOverride(overrides, `sections.${sectionIndex}.callout.title`, section.callout.title),
+          description: getOverride(
+            overrides,
+            `sections.${sectionIndex}.callout.description`,
+            section.callout.description,
+          ),
+          bullets: section.callout.bullets?.map((bullet, bulletIndex) =>
+            getOverride(overrides, `sections.${sectionIndex}.callout.bullets.${bulletIndex}`, bullet),
+          ),
+        }
+      : undefined,
+    cta: section.cta
+      ? {
+          ...section.cta,
+          label: getOverride(overrides, `sections.${sectionIndex}.cta.label`, section.cta.label),
+          href: getOverride(overrides, `sections.${sectionIndex}.cta.href`, section.cta.href),
+        }
+      : undefined,
+    media: section.media
+      ? {
+          ...section.media,
+          src: getOverride(overrides, `sections.${sectionIndex}.media.src`, section.media.src),
+          alt: getOverride(overrides, `sections.${sectionIndex}.media.alt`, section.media.alt),
+        }
+      : undefined,
+  }));
+
+  const spotlight = content.spotlight
+    ? {
+        ...content.spotlight,
+        title: getOverride(overrides, "spotlight.title", content.spotlight.title),
+        quote: getOverride(overrides, "spotlight.quote", content.spotlight.quote),
+        author: getOverride(overrides, "spotlight.author", content.spotlight.author),
+        role: getOverride(overrides, "spotlight.role", content.spotlight.role),
+      }
+    : undefined;
+
+  const resources = content.resources?.map((resource, resourceIndex) => ({
+    ...resource,
+    title: getOverride(overrides, `resources.${resourceIndex}.title`, resource.title),
+    description: getOverride(overrides, `resources.${resourceIndex}.description`, resource.description),
+    href: getOverride(overrides, `resources.${resourceIndex}.href`, resource.href),
+  }));
+
+  const faqs = content.faqs?.map((faq, faqIndex) => ({
+    ...faq,
+    question: getOverride(overrides, `faqs.${faqIndex}.question`, faq.question),
+    answer: getOverride(overrides, `faqs.${faqIndex}.answer`, faq.answer),
+  }));
+
+  const footerNote = getOverride(overrides, "footerNote", content.footerNote);
+
+  return {
+    hero,
+    sections: sections ?? [],
+    spotlight,
+    resources,
+    faqs,
+    footerNote,
+  };
+}
+
+export default function CommunityPageTemplate({ content, pageKey }: Props) {
+  const { language } = useLanguage();
+  const overrides = useContentOverrides({ page: pageKey, language });
+  const mergedContent = useMemo(() => applyOverrides(content, overrides), [content, overrides]);
+  const { hero, sections, spotlight, resources, faqs, footerNote } = mergedContent;
 
   return (
     <div className="space-y-12">

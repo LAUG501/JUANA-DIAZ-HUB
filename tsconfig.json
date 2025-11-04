@@ -26,6 +26,9 @@
       "@/data/*": [
         "src/data/*"
       ],
+      "@/lib/*": [
+        "src/lib/*"
+      ],
       "@/styles/*": [
         "src/styles/*"
       ],
