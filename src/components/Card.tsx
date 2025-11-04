@@ -10,9 +10,10 @@ export type CardProps = {
   description?: string;
   href?: string;
   children?: ReactNode;
+  ctaLabel?: string;
 };
 
-export default function Card({ title, eyebrow, imageUrl, description, href, children }: CardProps) {
+export default function Card({ title, eyebrow, imageUrl, description, href, children, ctaLabel }: CardProps) {
   const content = (
     <>
       {imageUrl ? (
@@ -34,7 +35,7 @@ export default function Card({ title, eyebrow, imageUrl, description, href, chil
         {children}
         {href && !children ? (
           <span className="mt-auto inline-flex items-center text-sm font-semibold text-primary transition hover:text-primary/80 dark:text-secondary dark:hover:text-secondary/80">
-            Learn more →
+            {ctaLabel ?? "Learn more →"}
           </span>
         ) : null}
       </div>

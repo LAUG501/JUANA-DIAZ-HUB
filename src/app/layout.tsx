@@ -20,10 +20,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="antialiased">
         <ThemeProvider>
           <LanguageProvider>
-            <div className="min-h-screen flex flex-col bg-neutralLight text-neutralDark dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
-              <Navbar />
-              <main className="flex-1 container mx-auto px-4 pt-24 pb-12">{children}</main>
-              <Footer />
+            <div className="min-h-screen bg-neutralLight text-neutralDark transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
+              <div className="flex min-h-screen">
+                <Navbar />
+                <div className="flex min-h-screen flex-1 flex-col">
+                  <main className="flex-1">
+                    <div className="mx-auto w-full max-w-6xl px-4 py-10 md:px-8 lg:px-12">{children}</div>
+                  </main>
+                  <Footer />
+                </div>
+              </div>
             </div>
           </LanguageProvider>
         </ThemeProvider>
