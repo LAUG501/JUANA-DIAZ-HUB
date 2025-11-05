@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
 import ContentEditor from "../../components/admin/ContentEditor";
+import ForumModerationPanel from "../../components/admin/ForumModerationPanel";
+import MemberManager from "../../components/admin/MemberManager";
 import { getSession } from "../../lib/auth";
 import { listPageContent } from "../../lib/content-service";
 import homeContent from "../../data/home-content";
@@ -279,6 +281,9 @@ export default async function DashboardPage() {
           </div>
         </div>
       </section>
+
+      <MemberManager />
+      <ForumModerationPanel />
     </div>
   );
 }

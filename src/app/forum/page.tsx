@@ -1,10 +1,10 @@
 import ForumLanding from "@/components/forum/ForumLanding";
-import { listThreads } from "@/lib/forum-service";
+import { listForumTags, listThreads } from "@/lib/forum-service";
 
 export const dynamic = "force-dynamic";
 
 export default async function ForumPage() {
-  const threads = await listThreads();
+  const [threads, tags] = await Promise.all([listThreads(), listForumTags()]);
 
-  return <ForumLanding threads={threads} />;
+  return <ForumLanding threads={threads} tags={tags} />;
 }

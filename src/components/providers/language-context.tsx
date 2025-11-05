@@ -145,6 +145,7 @@ type Dictionary = {
       replyLabel: string;
       likeLabel: string;
       empty: string;
+      allTags: string;
     };
     composer: {
       title: string;
@@ -158,6 +159,11 @@ type Dictionary = {
       submit: string;
       submitting: string;
       error: string;
+      tagsLabel: string;
+      tagsPlaceholder: string;
+      tagsHint: string;
+      removeTag: string;
+      tagCount: string;
     };
     reply: {
       title: string;
@@ -178,6 +184,41 @@ type Dictionary = {
       error: string;
     };
   };
+  admin: {
+    members: {
+      title: string;
+      description: string;
+      searchPlaceholder: string;
+      table: {
+        name: string;
+        email: string;
+        role: string;
+        provider: string;
+        joined: string;
+        locale: string;
+        actions: string;
+      };
+      roleOptions: { user: string; moderator: string; admin: string };
+      status: { updating: string; updated: string; error: string };
+      empty: string;
+    };
+    moderation: {
+      title: string;
+      description: string;
+      table: {
+        thread: string;
+        replies: string;
+        likes: string;
+        tags: string;
+        actions: string;
+      };
+      remove: string;
+      confirm: string;
+      removed: string;
+      error: string;
+      empty: string;
+    };
+  };
 };
 
 type LanguageContextValue = {
@@ -194,6 +235,7 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         { href: "/", label: "Home" },
         { href: "/explore", label: "Explore" },
         { href: "/forum", label: "Forum" },
+        { href: "/messages", label: "Messages" },
         { href: "/nightlife", label: "Nightlife" },
         { href: "/culture", label: "Culture" },
         { href: "/safety", label: "Safety" },
@@ -347,6 +389,7 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         replyLabel: "{count} replies",
         likeLabel: "{count} appreciations",
         empty: "Be the first to spark a conversation!",
+        allTags: "All tags",
       },
       composer: {
         title: "Start a new conversation",
@@ -360,6 +403,11 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         submit: "Publish thread",
         submitting: "Posting...",
         error: "Unable to create thread.",
+        tagsLabel: "Tags",
+        tagsPlaceholder: "Add or search for tags",
+        tagsHint: "{count} slots remaining",
+        removeTag: "Remove tag {tag}",
+        tagCount: "{count} threads",
       },
       reply: {
         title: "Add your voice",
@@ -380,6 +428,45 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         error: "Unable to update appreciation.",
       },
     },
+    admin: {
+      members: {
+        title: "Member directory",
+        description: "Review roles, providers, and locales for everyone who has access to the hub.",
+        searchPlaceholder: "Filter by name or email",
+        table: {
+          name: "Name",
+          email: "Email",
+          role: "Role",
+          provider: "Provider",
+          joined: "Joined",
+          locale: "Locale",
+          actions: "Actions",
+        },
+        roleOptions: { user: "Learner", moderator: "Moderator", admin: "Administrator" },
+        status: {
+          updating: "Saving...",
+          updated: "Role updated",
+          error: "Unable to update role",
+        },
+        empty: "No members yet. Invite neighbors via Google, Facebook, or TikTok sign-in.",
+      },
+      moderation: {
+        title: "Forum moderation",
+        description: "Keep conversations healthy by reviewing threads with tags, replies, and appreciation counts.",
+        table: {
+          thread: "Thread",
+          replies: "Replies",
+          likes: "Appreciations",
+          tags: "Tags",
+          actions: "Actions",
+        },
+        remove: "Archive thread",
+        confirm: "Archive this thread? It will remove replies and likes for everyone.",
+        removed: "Thread archived",
+        error: "Unable to archive thread.",
+        empty: "No threads available yet.",
+      },
+    },
   },
   es: {
     nav: {
@@ -388,6 +475,7 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         { href: "/", label: "Inicio" },
         { href: "/explore", label: "Explorar" },
         { href: "/forum", label: "Foro" },
+        { href: "/messages", label: "Mensajes" },
         { href: "/nightlife", label: "Vida Nocturna" },
         { href: "/culture", label: "Cultura" },
         { href: "/safety", label: "Seguridad" },
@@ -542,6 +630,7 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         replyLabel: "{count} respuestas",
         likeLabel: "{count} reconocimientos",
         empty: "¡Sé la primera persona en iniciar una conversación!",
+        allTags: "Todas las etiquetas",
       },
       composer: {
         title: "Inicia una nueva conversación",
@@ -555,6 +644,11 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         submit: "Publicar hilo",
         submitting: "Publicando...",
         error: "No se pudo crear el hilo.",
+        tagsLabel: "Etiquetas",
+        tagsPlaceholder: "Añade o busca etiquetas",
+        tagsHint: "Quedan {count} espacios",
+        removeTag: "Eliminar etiqueta {tag}",
+        tagCount: "{count} hilos",
       },
       reply: {
         title: "Añade tu voz",
@@ -573,6 +667,45 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
         label: "Apreciar · {count}",
         likedLabel: "Apreciado · {count}",
         error: "No se pudo actualizar el reconocimiento.",
+      },
+    },
+    admin: {
+      members: {
+        title: "Directorio de miembros",
+        description: "Revisa roles, proveedores y ubicaciones de quienes acceden al hub.",
+        searchPlaceholder: "Filtra por nombre o correo",
+        table: {
+          name: "Nombre",
+          email: "Correo",
+          role: "Rol",
+          provider: "Proveedor",
+          joined: "Ingreso",
+          locale: "Idioma",
+          actions: "Acciones",
+        },
+        roleOptions: { user: "Aprendiz", moderator: "Moderadora", admin: "Administradora" },
+        status: {
+          updating: "Guardando...",
+          updated: "Rol actualizado",
+          error: "No se pudo actualizar el rol",
+        },
+        empty: "Aún no hay miembros. Invita vecinas con acceso Google, Facebook o TikTok.",
+      },
+      moderation: {
+        title: "Moderación del foro",
+        description: "Cuida las conversaciones revisando hilos con etiquetas, respuestas y reconocimientos.",
+        table: {
+          thread: "Hilo",
+          replies: "Respuestas",
+          likes: "Reconocimientos",
+          tags: "Etiquetas",
+          actions: "Acciones",
+        },
+        remove: "Archivar hilo",
+        confirm: "¿Archivar este hilo? Se eliminarán respuestas y reconocimientos.",
+        removed: "Hilo archivado",
+        error: "No se pudo archivar el hilo.",
+        empty: "Aún no hay hilos disponibles.",
       },
     },
   },

@@ -21,6 +21,15 @@ export default function ThreadDetailView({ thread }: Props) {
         <div className="space-y-3">
           <h1 className="text-3xl font-semibold text-slate-900 dark:text-white">{thread.title}</h1>
           <p className="muted text-base">{thread.summary}</p>
+          {thread.tags.length > 0 ? (
+            <ul className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-wide text-primary dark:text-secondary">
+              {thread.tags.map((tag) => (
+                <li key={tag.slug} className="rounded-full bg-primary/10 px-3 py-1 dark:bg-secondary/15">
+                  #{tag.label}
+                </li>
+              ))}
+            </ul>
+          ) : null}
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
               {new Date(thread.createdAt).toLocaleString(locale)} · {copy.hostedBy.replace("{name}", thread.authorName)}

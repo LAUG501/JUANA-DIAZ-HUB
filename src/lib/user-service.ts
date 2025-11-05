@@ -56,6 +56,26 @@ export async function updateUser(id: string, updates: Partial<Omit<UserRecord, "
   return user;
 }
 
+export async function listUsers() {
+  const db = await readDatabase();
+  return db.users
+    .slice()
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .map((user) => ({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      provider: user.provider,
+      createdAt: user.createdAt,
+      locale: user.locale,
+    }));
+}
+
+export async function updateUserRole(id: string, role: UserRole) {
+  return updateUser(id, { role });
+}
+
 export async function upsertUserByProvider(input: CreateUserInput, roleHint?: UserRole) {
   const existing = await findUserByProvider(input.provider, input.providerId);
   if (existing) {

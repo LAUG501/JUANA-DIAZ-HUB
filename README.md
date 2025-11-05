@@ -7,9 +7,11 @@ Key highlights:
 - OAuth-ready single sign-on (Google, Facebook, TikTok) plus secure admin credentials.
 - Left-rail dashboard with pinned hub navigation, live language + theme toggles, and per-route "new" indicators.
 - Dynamic forum backed by server APIs for threads, replies, and appreciations.
+- Rich tagging, moderation, and analytics workflows so admins can curate discussions without leaving the dashboard.
 - AI Lab for testing curated API keys, logging usage, and publishing an RSS feed of provider updates.
 - School workspace where learners progress through conversational AI lessons and mark steps complete.
 - Inline CMS blocks so admins can edit home, explore, and history copy without touching code.
+- Unified inbox and member directory so administrators can respond to community messages, audit roles, and manage SSO access in one place.
 
 ## Getting started
 

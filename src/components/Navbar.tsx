@@ -362,6 +362,7 @@ export default function Navbar() {
     if (href.startsWith("/waiting-list")) return "waiting";
     if (href.startsWith("/analytics")) return "analytics";
     if (href.startsWith("/contact")) return "contact";
+    if (href.startsWith("/messages")) return "messages";
     if (href.startsWith("/ai-assistant")) return "messages";
     if (href.startsWith("/login")) return "login";
     return "default";
@@ -377,7 +378,7 @@ export default function Navbar() {
       icon: "messages" as const,
       label: dictionary.actions.messages,
       value: session ? "3" : "0",
-      href: session ? "/dashboard#messages" : "/forum",
+      href: session ? "/messages" : "/forum",
     },
     {
       icon: "courses" as const,
